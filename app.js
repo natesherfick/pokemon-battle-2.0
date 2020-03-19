@@ -1,3 +1,75 @@
+//POKEMON OBJECT//
+let pokemon = {
+  charmander : {
+      name: "CHARMANDER",
+      sprite: 'Charmander_Front.gif',
+      back: 'Charmander_Back.gif',
+      level: "5",
+      maxHP: 100,
+      attacks: [{
+          attack1: 'scratch',
+          strength: 10
+      }]
+  },
+  squirtle : {
+    name: "SQUIRTLE",
+    sprite: 'Squirtle.gif',
+    back: 'Squirtle_Back.gif',
+    level: "5",
+    maxHP: 100,
+    attacks: [{
+        attack1: 'scratch',
+        strength: 10
+    }]
+}
+}
+
+
+
+function drawPokemonFromStart(){
+let template = ""
+
+for (let key in pokemon){
+  let item = pokemon[key]
+
+  template += `<div class="col-7 rounded bg-transparent text-light text-center">
+  <img onclick="setPokemon('${key}')" class="img-fluid" src="${item.sprite}">
+  <h4 class="pixelish-font">${item.name}</h4>
+  </div>
+  `
+}
+
+document.getElementById("start-card").innerHTML = template
+}
+
+
+
+function setPokemon(userPokemon){
+let currentPokemon = pokemon[userPokemon]
+document.getElementById("pokemon-select").classList.add("hidden")
+document.getElementById("battle-scene").classList.remove("hidden")
+console.log(currentPokemon)
+
+drawSelectedPokemon(currentPokemon)
+}
+
+//THIS WILL DISPLAY THE POKEMON THE USER SELECTED BY SETTING NAME, IMAGE, ATTACKS
+function drawSelectedPokemon(currentPokemon){
+
+document.getElementById("userPokemonName").innerText = currentPokemon.name;
+// @ts-ignore
+document.getElementById("userSprite").src = currentPokemon.back;
+
+
+}
+
+
+
+
+
+
+
+
 
 let UserHP = 100;
 let EnemyHP = 100;
@@ -13,7 +85,7 @@ if(EnemyHP <= UserAttack){
   EnemyHP = 0
 }
 hideButtons()
-text.innerHTML = "CHARMANDER used scratch!"
+text.innerHTML = `${pokemon.charmander.name} used ${pokemon.charmander.attacks[0].attack1}!`
 setTimeout(draw, 1500)
 
 if (EnemyHP <= 0){SquirtleFainted()}
@@ -83,3 +155,7 @@ document.getElementById("enemy-bar").style.width= `${EnemyHP}%`
 
 document.getElementById("user-bar").style.width= `${UserHP}%` 
 }
+
+
+//INVOKED FUNCTIONS//
+drawPokemonFromStart()

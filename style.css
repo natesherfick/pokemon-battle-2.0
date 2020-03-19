@@ -5,6 +5,13 @@ background-size: cover;
 background-repeat: no-repeat
 }
 
+.gif-background{
+  background-image: url(gif_background.gif);
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
 .pixelish-font{
   font-family: 'Press Start 2P', cursive;
 }
